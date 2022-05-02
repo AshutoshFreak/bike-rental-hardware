@@ -38,7 +38,7 @@ def lock():
 
 # unlock endpoint. Transmits signal to LoRA module to unlock a bike
 @app.route('/unlock/<bike_id>', methods=['GET'])
-def lock():
+def unlock():
     if request.method == 'GET':
         command = f'{bike_id}1'
         response = {'bike': bike_id}
