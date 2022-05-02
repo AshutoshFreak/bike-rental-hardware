@@ -1,7 +1,8 @@
 # Importing flask module in the project is mandatory
 # An object of Flask class is our WSGI application.
-from flask import Flask, jsonify
-import serial
+from flask import Flask, jsonify, request
+# uncomment
+# import serial
 import time
   
 # Flask constructor takes the name of 
@@ -9,7 +10,7 @@ import time
 app = Flask(__name__)
 
 # define port for serial transmission
-port = serial.Serial('/dev/ttyUSB0', 115200, timeout=1)
+# port = serial.Serial('/dev/ttyUSB0', 115200, timeout=1)
 
 # The route() function of the Flask class is a decorator, 
 # which tells the application which URL should call 
@@ -21,12 +22,13 @@ def hello_world():
 
 # lock endpoint. Transmits signal to LoRA module to lock a bike
 @app.route('/lock/<bike_id>', methods=['GET'])
-def lock():
+def lock(bike_id):
     if request.method == 'GET':
         command = f'{bike_id}0'
         response = {'bike': bike_id}
         try:
-            port.write(bytes(bike_id, 'utf-8'))
+            # uncomment
+            # port.write(bytes(bike_id, 'utf-8'))
             response['success'] = 1
             # successful status response is 1
             return response, 1
@@ -38,12 +40,13 @@ def lock():
 
 # unlock endpoint. Transmits signal to LoRA module to unlock a bike
 @app.route('/unlock/<bike_id>', methods=['GET'])
-def unlock():
+def unlock(bike_id):
     if request.method == 'GET':
         command = f'{bike_id}1'
         response = {'bike': bike_id}
         try:
-            port.write(bytes(bike_id, 'utf-8'))
+            # uncomment
+            # port.write(bytes(bike_id, 'utf-8'))
             response['success'] = 1
             # successful status response is 1
             return response, 1
