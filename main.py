@@ -52,12 +52,6 @@ def lock():
             # unsuccessful status response is 0
             return response, 0
 
-# lock endpoint. Transmits signal to LoRA module to lock a bike
-@app.route('/lock/<bike_id>', methods=['GET'])
-def lock():
-    bike_id = f'{bike_id}0'
-    port.write(bytes(bike_id, 'utf-8'))
-
 # main driver function
 if __name__ == '__main__':
     # run() method of Flask class runs the application 
